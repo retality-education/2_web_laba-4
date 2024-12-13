@@ -81,13 +81,13 @@
 
                 ORDER BY status_id ASC");
             $statuses = $db_handle->runQuery("SELECT STATUS as statusname,  STATUS_CSS_ID as task_status_tagname from STATUSES ORDER BY ID ASC");
-
+             // <?= сюда вставлять php код для обращения к элементам массива ?>
             for ($k = 1; $k <= count($statuses); $k++) {
                         echo '<div id = "'.$statuses[$k - 1]["task_status_tagname"].'" class="status">';
                         echo '  <h2>'.$statuses[$k - 1]["statusname"].'</h2>';
                 for ($i = 0; $i < count($tasks); $i++) {
-                    if ($tasks[$i]["status_id"] == $k) {
-                        echo '  <div class="task '.$tasks[$i]["task_priority_tagname"].' '.$tasks[$i]["task_type_tagname"].'">';
+                    if ($tasks[$i]["status_id"] == $k) { ?>
+                        echo '  <div class="task <?=$tasks[$i]["task_priority_tagname"]?> '.$tasks[$i]["task_type_tagname"].'">';
                         echo '      <div class="number">Task №'.$tasks[$i]["task_id"].'</div>';
                         echo '      <div class="task__title">'.$tasks[$i]["task_theme"].'</div>';
                         echo '      <div class="task__user">';
@@ -96,7 +96,7 @@
                         echo '      </div>';
                         echo '      <a href="#task-'.$tasks[$i]["task_id"].'">Подробнее</a>';
                         echo '  </div>';
-                    }
+                    <?}
                 }
                         echo'   <p class="no-tasks">Нет задач в этом статусе.</p>';
                         echo'</div>';
